@@ -20,8 +20,15 @@
     "eject": "react-scripts eject",
     "precommit": "lint-staged"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "pre-push": "lint-staged"
+    }
+  },
   "lint-stagged": {
     "src/**/*.{js,jsx,json,css}": [
+      "eslint --fix",
       "prettier --write",
       "git add"
     ]

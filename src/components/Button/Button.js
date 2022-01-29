@@ -5,14 +5,14 @@ import styles from "./Button.module.css";
 
 const Button = ({ type, to, text, buttonStyle, className }) => {
   return type === "link" ? (
-    <Link to={to} className={classNames(styles.root, styles[buttonStyle], className)}>
+    <Link
+      to={to}
+      className={classNames(styles.root, styles[buttonStyle], className)}
+    >
       {text}
     </Link>
   ) : (
-    <button
-      type={type}
-      className={classNames(styles.root, styles[buttonStyle], className)}
-    >
+    <button type={type} className={classNames(styles.root, styles[buttonStyle], className)}>
       {text}
     </button>
   );
