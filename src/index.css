@@ -1,3 +1,14 @@
+:root {
+  --text-color: #1f2933;
+  --main-blue: #0967d2;
+  --secondary-blue: #47a3f3;
+  --main-gray: #7b8794;
+  --secondary-gray: #cbd2d9;
+  --tertiary-gray: #f5f7fa;
+  --font-size: 18px;
+  --delay: 0.2s;
+}
+
 *,
 *::before,
 *::after {
@@ -9,8 +20,8 @@
 html,
 body {
   font-family: 'Nunito Sans', sans-serif;
-  color: #1f2933;
-  font-size: 18px;
+  color: var(--text-color);
+  font-size: var(--font-size);
 }
 
 input {
@@ -26,7 +37,7 @@ button {
 a {
   text-decoration: none;
   outline: none;
-  color: #1f2933;
+  color: var(--text-color);
 }
 
 li {

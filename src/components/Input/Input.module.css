@@ -9,10 +9,10 @@
 
 .input {
   padding: 12px 16px;
-  border: 1px solid #cbd2d9;
+  border: 1px solid var(--secondary-gray);
   border-radius: 10px;
 
   font-size: 16px;
   font-family: 'Nunito Sans', sans-serif;
-  color: #1f2933;
+  color: var(--text-color);
 }

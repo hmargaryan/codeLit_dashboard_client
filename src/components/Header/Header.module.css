@@ -3,7 +3,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 24px;
-  border-top: 5px solid #0967d2;
+  border-top: 5px solid var(--main-blue);
 }
 
 .logo {
@@ -20,19 +20,19 @@
 }
 
 .menuLink {
-  color: #7b8794;
+  color: var(--main-gray);
   border-bottom: 2px solid transparent;
-  transition: border-bottom 0.2s;
+  transition: border-bottom var(--delay);
 }
 
 .menuLink:hover,
 .menuLink:focus {
-  border-bottom: 2px solid #0967d2;
-  transition: border-bottom 0.2s;
+  border-bottom: 2px solid var(--main-blue);
+  transition: border-bottom var(--delay);
 }
 
 .menuLinkActive {
-  color: #0967d2;
+  color: var(--main-blue);
   font-weight: 700;
   pointer-events: none;
 }

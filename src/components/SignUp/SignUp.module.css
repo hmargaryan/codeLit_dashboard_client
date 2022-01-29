@@ -4,7 +4,7 @@
   padding: 24px 72px;
   border-radius: 10px;
 
-  background-color: #f5f7fa;
+  background-color: var(--tertiary-gray);
 }
 
 .title {
@@ -16,7 +16,7 @@
 .form {
   margin-bottom: 16px;
   padding-top: 16px;
-  border-top: 1px solid #cbd2d9;
+  border-top: 1px solid var(--secondary-gray);
 }
 
 .input {
@@ -26,7 +26,7 @@
 .inputWithBorder {
   margin-bottom: 16px;
   padding-bottom: 24px;
-  border-bottom: 1px solid #cbd2d9;
+  border-bottom: 1px solid var(--secondary-gray);
 }
 
 .submitButton {
@@ -35,13 +35,13 @@
 }
 
 .singInLink {
-  color: #0967d2;
+  color: var(--main-blue);
   text-decoration: underline;
-  transition: color 0.2s;
+  transition: color var(--delay);
 }
 
 .singInLink:hover,
 .singInLink:focus {
-  color: #47a3f3;
-  transition: color 0.2s;
+  color: var(--secondary-blue);
+  transition: color var(--delay);
 }
