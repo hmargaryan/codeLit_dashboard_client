@@ -17,14 +17,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "prepare": "husky install"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged",
-      "pre-push": "lint-staged"
-    }
+    "eject": "react-scripts eject"
   },
   "lint-stagged": {
     "src/**/*.{js,jsx,json,css}": [
