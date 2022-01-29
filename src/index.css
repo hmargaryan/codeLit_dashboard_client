@@ -10,7 +10,6 @@ html,
 body {
   font-family: 'Nunito Sans', sans-serif;
   color: #1f2933;
-  background-color: #f5f7fa;
   font-size: 18px;
 }
 
@@ -26,6 +25,7 @@ button {
 
 a {
   text-decoration: none;
+  outline: none;
   color: #1f2933;
 }
 

@@ -9,10 +9,16 @@ const SignIn = () => {
     <div className={styles.root}>
       <h2 className={styles.title}>Вход</h2>
       <form className={styles.form}>
-        <Input type="text" label="Логин" className={styles.input} />
+        <Input
+          type="text"
+          label="Логин"
+          name="login"
+          className={styles.input}
+        />
         <Input
           type="password"
           label="Пароль"
+          name="password"
           className={styles.inputWithBorder}
         />
         <Button
@@ -23,7 +29,7 @@ const SignIn = () => {
         />
       </form>
       <p>
-        Нет аккаунта?{" "}
+        Нет аккаунта?&nbsp;
         <Link to="/sign-up" className={styles.singUpLink}>
           Зарегистрируйтесь
         </Link>

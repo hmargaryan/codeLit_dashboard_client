@@ -5,7 +5,6 @@
   border-radius: 10px;
 
   background-color: #f5f7fa;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
 
 .title {
@@ -38,4 +37,11 @@
 .singInLink {
   color: #0967d2;
   text-decoration: underline;
+  transition: color 0.2s;
+}
+
+.singInLink:hover,
+.singInLink:focus {
+  color: #47a3f3;
+  transition: color 0.2s;
 }

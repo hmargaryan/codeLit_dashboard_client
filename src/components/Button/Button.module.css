@@ -9,6 +9,18 @@
 }
 
 .primary {
-  color: #ffffff;
+  border: 1px solid transparent;
+
   background-color: #0967d2;
+  color: #ffffff;
+  transition: all 0.2s;
+}
+
+.primary:hover,
+.primary:focus {
+  border: 1px solid #0967d2;
+
+  background-color: transparent;
+  color: #0967d2;
+  transition: all 0.2s;
 }

@@ -9,14 +9,30 @@ const SignUp = () => {
     <div className={styles.root}>
       <h2 className={styles.title}>Регистрация</h2>
       <form className={styles.form}>
-        <Input type="text" label="Имя" className={styles.input} />
-        <Input type="text" label="Фамилия" className={styles.input} />
-        <Input type="email" label="Почта" className={styles.inputWithBorder} />
-        <Input type="text" label="Логин" className={styles.input} />
-        <Input type="password" label="Пароль" className={styles.input} />
+        <Input type="text" label="Имя" id="name" className={styles.input} />
+        <Input
+          type="text"
+          label="Фамилия"
+          id="surname"
+          className={styles.input}
+        />
+        <Input
+          type="email"
+          label="Почта"
+          id="email"
+          className={styles.inputWithBorder}
+        />
+        <Input type="text" label="Логин" id="login" className={styles.input} />
         <Input
           type="password"
           label="Пароль"
+          id="firstPassword"
+          className={styles.input}
+        />
+        <Input
+          type="password"
+          label="Пароль"
+          id="secondPassword"
           className={styles.inputWithBorder}
         />
         <Button
@@ -27,7 +43,7 @@ const SignUp = () => {
         />
       </form>
       <p>
-        Уже есть аккаунт?{" "}
+        Уже есть аккаунт?&nbsp;
         <Link to="/sign-in" className={styles.singInLink}>
           Войдите
         </Link>
