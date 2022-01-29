@@ -1,0 +1,40 @@
+.root {
+  max-width: 600px;
+  padding: 24px 72px;
+  border-radius: 10px;
+
+  background-color: #f5f7fa;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.title {
+  margin-bottom: 24px;
+
+  text-align: center;
+}
+
+.form {
+  margin-bottom: 16px;
+  padding-top: 16px;
+  border-top: 1px solid #cbd2d9;
+}
+
+.input {
+  margin-bottom: 24px;
+}
+
+.inputWithBorder {
+  margin-bottom: 16px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #cbd2d9;
+}
+
+.submitButton {
+  width: 100%;
+  margin-top: 8px;
+}
+
+.singUpLink {
+  color: #0967d2;
+  text-decoration: underline;
+}

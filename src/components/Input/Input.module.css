@@ -1,0 +1,18 @@
+.root {
+  display: flex;
+  flex-direction: column;
+}
+
+.label {
+  margin-bottom: 7px;
+}
+
+.input {
+  padding: 12px 16px;
+  border: 1px solid #cbd2d9;
+  border-radius: 10px;
+
+  font-size: 14px;
+  font-family: 'Nunito Sans', sans-serif;
+  color: #1f2933;
+}
