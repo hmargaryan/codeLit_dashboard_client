@@ -12,7 +12,10 @@ const Button = ({ type, to, text, buttonStyle, className }) => {
       {text}
     </Link>
   ) : (
-    <button type={type} className={classNames(styles.root, styles[buttonStyle], className)}>
+    <button
+      type={type}
+      className={classNames(styles.root, styles[buttonStyle], className)}
+    >
       {text}
     </button>
   );
