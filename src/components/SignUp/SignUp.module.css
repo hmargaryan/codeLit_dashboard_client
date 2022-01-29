@@ -1,10 +1,11 @@
 .root {
   max-width: 600px;
+  margin: 0 auto;
   padding: 24px 72px;
   border-radius: 10px;
 
   background-color: #f5f7fa;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
 
 .title {

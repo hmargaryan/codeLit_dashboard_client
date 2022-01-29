@@ -10,6 +10,8 @@ html,
 body {
   font-family: 'Nunito Sans', sans-serif;
   color: #1f2933;
+  background-color: #f5f7fa;
+  font-size: 18px;
 }
 
 input {
@@ -25,4 +27,8 @@ button {
 a {
   text-decoration: none;
   color: #1f2933;
+}
+
+li {
+  list-style: none;
 }
