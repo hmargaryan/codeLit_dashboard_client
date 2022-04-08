@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { MantineProvider, AppShell, Navbar, Header } from '@mantine/core'
+import ProtectedRoute from './components/ProtectedRoute'
 import SignUp from './pages/SignUp/SignUp'
 import SignIn from './pages/SignIn/SignIn'
+import Test from './Test'
 
 const SIGN_IN = '/sign-in'
 const SIGN_UP = '/sign-up'
@@ -45,7 +47,9 @@ const App = () => {
             })}
           >
             <Routes>
-              <Route path='/sign-in' element={<SignIn />} />
+              <Route path='/test' element={<ProtectedRoute />}>
+                <Route path='/test' element={<Test />} />
+              </Route>
             </Routes>
           </AppShell>
         )}
