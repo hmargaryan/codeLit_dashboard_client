@@ -3,6 +3,7 @@ import {
   Center,
   Box,
   Paper,
+  Stack,
   Title,
   TextInput,
   PasswordInput,
@@ -53,9 +54,11 @@ const SignIn = () => {
           {error && <Text size='sm' color='red'>{error}</Text>}
         </Box>
         <form className={styles.form} onSubmit={form.onSubmit((values, e) => handleFormSubmit(values, e))}>
-          <TextInput type='email' label='Почта' icon={<Mail size={16} />} mb='sm' {...form.getInputProps('email')} />
-          <PasswordInput label='Пароль' mb='xl' icon={<Lock size={16} />} {...form.getInputProps('password')} />
-          <Button type='submit' loading={isLoading} className={styles.button}>Войти</Button>
+          <Stack>
+            <TextInput type='email' label='Почта' icon={<Mail size={16} />} {...form.getInputProps('email')} />
+            <PasswordInput label='Пароль' mb='xs' icon={<Lock size={16} />} {...form.getInputProps('password')} />
+            <Button type='submit' loading={isLoading} className={styles.button}>Войти</Button>
+          </Stack>
         </form>
         <Text size='sm'>Нет аккаунта? <Link to='/sign-up' className={styles.helpLink}>Зарегистрироваться</Link></Text>
       </Paper>
