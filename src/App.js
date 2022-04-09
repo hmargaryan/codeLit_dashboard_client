@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import { MantineProvider, AppShell, Navbar, Header } from '@mantine/core'
+import { MantineProvider, AppShell, Header } from '@mantine/core'
 import ProtectedRoute from './components/ProtectedRoute'
+import Navbar from './components/Navbar/Navbar'
 import SignUp from './pages/SignUp/SignUp'
 import SignIn from './pages/SignIn/SignIn'
 import Test from './Test'
@@ -18,7 +19,7 @@ const App = () => {
   }, [])
 
   return (
-    <MantineProvider>
+    <MantineProvider theme={{ fontFamily: 'Nunito Sans, sans-serif' }}>
       <BrowserRouter>
         <Routes>
           <Route path='/sign-up' element={<SignUp />} />
@@ -27,11 +28,7 @@ const App = () => {
         {!isSignPage && (
           <AppShell
             padding='md'
-            navbar={
-              <Navbar width={{ base: 300 }} height={500} p='xs'>
-                {/* Navbar content */}
-              </Navbar>
-            }
+            navbar={<Navbar />}
             header={
               <Header height={60} p='xs'>
                 {/* Header content */}
@@ -44,8 +41,7 @@ const App = () => {
                     ? theme.colors.dark[8]
                     : theme.colors.gray[0],
               },
-            })}
-          >
+            })}>
             <Routes>
               <Route path='/test' element={<ProtectedRoute />}>
                 <Route path='/test' element={<Test />} />

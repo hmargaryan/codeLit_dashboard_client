@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import {
   Center,
   Box,
+  Stack,
   Paper,
   Title,
   TextInput,
@@ -60,11 +61,13 @@ const SignUp = () => {
           {error && <Text size='sm' color='red'>{error}</Text>}
         </Box>
         <form className={styles.form} onSubmit={form.onSubmit((values, e) => handleFormSubmit(values, e))}>
-          <TextInput label='Имя' mb='sm' {...form.getInputProps('name')} />
-          <TextInput type='email' label='Почта' icon={<Mail size={16} />} mb='sm' {...form.getInputProps('email')} />
-          <TextInput type='password' label='Пароль' icon={<Lock size={16} />} mb='sm' {...form.getInputProps('password')} />
-          <PasswordInput label='Повторите пароль' icon={<Lock size={16} />} mb='xl' {...form.getInputProps('confirmedPassword')} />
-          <Button type='submit' loading={isLoading} className={styles.button}>Зарегистрироваться</Button>
+          <Stack>
+            <TextInput label='Имя' {...form.getInputProps('name')} />
+            <TextInput type='email' label='Почта' icon={<Mail size={16} />} {...form.getInputProps('email')} />
+            <TextInput type='password' label='Пароль' icon={<Lock size={16} />} {...form.getInputProps('password')} />
+            <PasswordInput label='Повторите пароль' icon={<Lock size={16} />} mb='xs' {...form.getInputProps('confirmedPassword')} />
+            <Button type='submit' loading={isLoading} className={styles.button}>Зарегистрироваться</Button>
+          </Stack>
         </form>
         <Text size='sm'>Уже есть аккаунт? <Link to='/sign-in' className={styles.helpLink}>Войти</Link></Text>
       </Paper>
