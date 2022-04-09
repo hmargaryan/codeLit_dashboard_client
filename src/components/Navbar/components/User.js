@@ -16,7 +16,7 @@ const User = () => {
     <Fragment>
       <Divider size='xs' my='sm' />
       <Menu
-        sx={() => ({ width: '100%' })}
+        sx={{ width: '100%' }}
         withArrow
         position='right'
         control={

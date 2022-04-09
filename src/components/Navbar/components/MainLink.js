@@ -12,7 +12,9 @@ const MainLink = ({ path, icon, color, label }) => {
       padding: theme.spacing.xs,
       borderRadius: theme.radius.sm,
       color: theme.colorScheme === 'dark' ? theme.colors.dark[0] : theme.black,
-      backgroundColor: location.pathname === path && theme.colors.gray[1],
+      backgroundColor: location.pathname === path && (
+        theme.colorScheme === 'dark' ? theme.colors.dark[5] : theme.colors.gray[1]
+      ),
 
       '&:hover': {
         backgroundColor:
