@@ -2,8 +2,6 @@ import React, { useState, useEffect } from 'react'
 import {
   Center,
   Box,
-  Stack,
-  Paper,
   Title,
   TextInput,
   PasswordInput,
@@ -12,11 +10,11 @@ import {
 } from '@mantine/core'
 import { useForm, yupResolver } from '@mantine/form'
 import { Mail, Lock } from 'tabler-icons-react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import cookie from 'js-cookie'
-import { useSignUpMutation } from '../../store/services/userApi'
-import { signUpSchema } from '../../utils/validationSchemes'
-import styles from '../../styles/Sign.module.css'
+import { useSignUpMutation } from '../store/services/userApi'
+import { signUpSchema } from '../utils/validationSchemes'
+import styles from '../styles/Sign.module.css'
 
 const SignUp = () => {
   const form = useForm({
@@ -30,6 +28,7 @@ const SignUp = () => {
   })
   const [signUp, { data, isLoading }] = useSignUpMutation()
   const [error, setError] = useState(null)
+  const navigate = useNavigate()
 
   useEffect(() => {
     if (data) {
@@ -43,7 +42,7 @@ const SignUp = () => {
 
     try {
       await signUp(values).unwrap()
-      console.log(data)
+      navigate('/create-workspace')
     } catch (error) {
       if (error?.data?.field) {
         form.setFieldError(error.data.field, error.data.message)
@@ -55,22 +54,20 @@ const SignUp = () => {
 
   return (
     <Center className={styles.root}>
-      <Paper className={styles.paper} p='xl' shadow='sm'>
+      <Box className={styles.container}>
         <Box mb='sm'>
           <Title order={2}>Регистрация</Title>
           {error && <Text size='sm' color='red'>{error}</Text>}
         </Box>
         <form className={styles.form} onSubmit={form.onSubmit((values, e) => handleFormSubmit(values, e))}>
-          <Stack>
-            <TextInput label='Имя' {...form.getInputProps('name')} />
-            <TextInput type='email' label='Почта' icon={<Mail size={16} />} {...form.getInputProps('email')} />
-            <TextInput type='password' label='Пароль' icon={<Lock size={16} />} {...form.getInputProps('password')} />
-            <PasswordInput label='Повторите пароль' icon={<Lock size={16} />} mb='xs' {...form.getInputProps('confirmedPassword')} />
-            <Button type='submit' loading={isLoading} className={styles.button}>Зарегистрироваться</Button>
-          </Stack>
+          <TextInput label='Имя' mb='xs' {...form.getInputProps('name')} />
+          <TextInput type='email' label='Почта' mb='xs' icon={<Mail size={16} />} {...form.getInputProps('email')} />
+          <TextInput type='password' label='Пароль' mb='xs' icon={<Lock size={16} />} {...form.getInputProps('password')} />
+          <PasswordInput label='Повторите пароль' mb='lg' icon={<Lock size={16} />} {...form.getInputProps('confirmedPassword')} />
+          <Button type='submit' loading={isLoading} className={styles.button}>Зарегистрироваться</Button>
         </form>
         <Text size='sm'>Уже есть аккаунт? <Link to='/sign-in' className={styles.helpLink}>Войти</Link></Text>
-      </Paper>
+      </Box>
     </Center>
   )
 };

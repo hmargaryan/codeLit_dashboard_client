@@ -22,3 +22,8 @@ export const signInSchema = Yup.object().shape({
   password: Yup.string()
     .required('Введите пароль')
 })
+
+export const createWorkspaceSchema = Yup.object().shape({
+  name: Yup.string().required('Введите название рабочее пространства'),
+  slug: Yup.string().required('Введите слаг рабочее пространства')
+})

@@ -1,27 +1,23 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import { MantineProvider, ColorSchemeProvider, AppShell } from '@mantine/core'
+import { MantineProvider, ColorSchemeProvider } from '@mantine/core'
+import AppLayout from './AppLayout'
 import ProtectedRoute from './components/ProtectedRoute'
-import Navbar from './components/Navbar/Navbar'
-import Header from './components/Header'
-import SignUp from './pages/SignUp/SignUp'
-import SignIn from './pages/SignIn/SignIn'
+import SignUp from './pages/SignUp'
+import SignIn from './pages/SignIn'
+import CreateWorkspace from './pages/Workspace/CreateWorkspace'
 import Test from './Test'
 
 const SIGN_IN = '/sign-in'
 const SIGN_UP = '/sign-up'
-const SIGN_PAGES = [SIGN_IN, SIGN_UP]
+const CREATE_WORKSPACE = '/create-workspace'
+const SIGN_PAGES = [SIGN_IN, SIGN_UP, CREATE_WORKSPACE]
 
 const App = () => {
-  const [isSignPage, setIsSignPage] = useState()
   const [colorScheme, setColorScheme] = useState('light')
 
   const toggleColorScheme = (value) =>
     setColorScheme(value || (colorScheme === 'dark' ? 'light' : 'dark'))
-
-  useEffect(() => {
-    setIsSignPage(SIGN_PAGES.includes(window.location.pathname))
-  }, [])
 
   return (
     <ColorSchemeProvider colorScheme={colorScheme} toggleColorScheme={toggleColorScheme}>
@@ -30,27 +26,15 @@ const App = () => {
           <Routes>
             <Route path='/sign-up' element={<SignUp />} />
             <Route path='/sign-in' element={<SignIn />} />
+            <Route path='/create-workspace' element={<ProtectedRoute />}>
+              <Route path='/create-workspace' element={<CreateWorkspace />} />
+            </Route>
+            <Route path='/' element={<AppLayout />}>
+              <Route path='/test' element={<ProtectedRoute />}>
+                <Route path='/test' element={<Test />} />
+              </Route>
+            </Route>
           </Routes>
-          {!isSignPage && (
-            <AppShell
-              padding='md'
-              navbar={<Navbar />}
-              header={<Header />}
-              styles={(theme) => ({
-                main: {
-                  backgroundColor:
-                    theme.colorScheme === 'dark'
-                      ? theme.colors.dark[8]
-                      : theme.colors.gray[0],
-                },
-              })}>
-              <Routes>
-                <Route path='/test' element={<ProtectedRoute />}>
-                  <Route path='/test' element={<Test />} />
-                </Route>
-              </Routes>
-            </AppShell>
-          )}
         </BrowserRouter>
       </MantineProvider>
     </ColorSchemeProvider>
