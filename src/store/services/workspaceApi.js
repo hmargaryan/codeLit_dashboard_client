@@ -21,8 +21,18 @@ export const workspaceApi = createApi({
         method: 'POST',
         body
       })
+    }),
+    fetchWorkspace: builder.query({
+      query: () => ({ url: '/info' })
+    }),
+    fetchWorkspaceMembers: builder.query({
+      query: () => ({ url: `/members` })
     })
   })
 })
 
-export const { useCreateWorkspaceMutation } = workspaceApi
+export const {
+  useCreateWorkspaceMutation,
+  useFetchWorkspaceQuery,
+  useFetchWorkspaceMembersQuery
+} = workspaceApi

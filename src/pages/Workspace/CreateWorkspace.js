@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import {
   Box,
   Center,
@@ -6,6 +6,7 @@ import {
   TextInput,
   Button
 } from '@mantine/core'
+import cookie from 'js-cookie'
 import { useForm, yupResolver } from '@mantine/form'
 import { useNavigate } from 'react-router-dom'
 import { useCreateWorkspaceMutation } from '../../store/services/workspaceApi'
@@ -20,8 +21,14 @@ const CreateWorkspace = () => {
       slug: ''
     }
   })
-  const [createWorkspace, { isLoading }] = useCreateWorkspaceMutation()
+  const [createWorkspace, { data, isLoading }] = useCreateWorkspaceMutation()
   const navigate = useNavigate()
+
+  useEffect(() => {
+    if (data) {
+      cookie.set('user', JSON.stringify(data), { expires: 7 })
+    }
+  }, [data])
 
   const handleFormSubmit = async (values, e) => {
     e.preventDefault()

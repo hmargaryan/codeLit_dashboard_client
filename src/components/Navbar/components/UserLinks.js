@@ -4,9 +4,9 @@ import { Link } from 'react-router-dom'
 import { User, Database, Palette, Logout } from 'tabler-icons-react';
 
 const links = [
-  { path: '/profile', icon: <User size={14} />, label: 'Профиль' },
-  { path: '/profile', icon: <Database size={14} />, label: 'Проекты' },
-  { path: '/profile', icon: <Palette size={14} />, label: 'Брендинг' }
+  { path: '/settings?tab=profile', icon: <User size={14} />, label: 'Профиль' },
+  { path: '/settings?tab=workspace', icon: <Database size={14} />, label: 'Рабочее пространство' },
+  { path: '/settings?tab=branding', icon: <Palette size={14} />, label: 'Брендинг' }
 ]
 
 const UserLinks = () => {
