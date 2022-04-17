@@ -54,3 +54,8 @@ export const addUserSchema = Yup.object().shape({
     .oneOf([Yup.ref('password'), null], 'Пароли должны совпадать')
     .required('Введите пароль')
 })
+
+export const chooseWorkspaceSchema = Yup.object().shape({
+  id: Yup.string()
+    .required('Выберите рабочее пространство')
+})

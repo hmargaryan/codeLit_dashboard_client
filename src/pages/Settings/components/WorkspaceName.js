@@ -11,7 +11,7 @@ const Workspace = ({ name, slug }) => {
         <Title
           order={2}
           sx={{
-            color: theme.colorScheme === 'dark' ? 'white' : 'black',
+            color: theme.colorScheme === 'dark' ? '#C1C2C5' : 'black',
             marginRight: theme.spacing.xs
           }}>
           {name}

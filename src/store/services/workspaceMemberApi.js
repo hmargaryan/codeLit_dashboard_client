@@ -21,8 +21,14 @@ export const workspaceMemberApi = createApi({
         method: 'POST',
         body
       })
+    }),
+    removeMember: builder.mutation({
+      query: (id) => ({
+        url: `remove/${id}`,
+        method: 'DELETE'
+      })
     })
   })
 })
 
-export const { useAddMemberMutation } = workspaceMemberApi
+export const { useAddMemberMutation, useRemoveMemberMutation } = workspaceMemberApi

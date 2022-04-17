@@ -22,7 +22,6 @@ const Settings = () => {
   const tabParam = new URLSearchParams(searchParams).get('tab')
   const { data: workspace } = useFetchWorkspaceQuery()
   const { data: members } = useFetchWorkspaceMembersQuery()
-
   const navigate = useNavigate()
 
   const handleTabChange = (tabIndex) => {

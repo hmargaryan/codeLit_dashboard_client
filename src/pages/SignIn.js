@@ -10,7 +10,7 @@ import {
 } from '@mantine/core'
 import { useForm, yupResolver } from '@mantine/form'
 import { Mail, Lock } from 'tabler-icons-react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import cookie from 'js-cookie'
 import { useSignInMutation } from '../store/services/userApi'
 import { signInSchema } from '../utils/validationSchemes'
@@ -26,10 +26,12 @@ const SignIn = () => {
   })
   const [signIn, { data, isLoading }] = useSignInMutation()
   const [error, setError] = useState(null)
+  const navigate = useNavigate()
 
   useEffect(() => {
     if (data) {
       cookie.set('user', JSON.stringify(data), { expires: 7 })
+      navigate('/choose-workspace')
     }
   }, [data])
 

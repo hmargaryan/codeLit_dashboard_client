@@ -3,6 +3,7 @@ import cookie from 'js-cookie'
 
 export const workspaceApi = createApi({
   reducerPath: 'api/workspace',
+  tagTypes: ['WorkspaceMembers'],
   baseQuery: fetchBaseQuery({
     baseUrl: 'http://localhost:5000/api/workspace',
     prepareHeaders: (headers) => {
@@ -26,7 +27,18 @@ export const workspaceApi = createApi({
       query: () => ({ url: '/info' })
     }),
     fetchWorkspaceMembers: builder.query({
-      query: () => ({ url: `/members` })
+      query: () => ({ url: '/members' }),
+      providesTags: ['WorkspaceMembers']
+    }),
+    fetchWorkspaces: builder.query({
+      query: () => ({ url: '/all' })
+    }),
+    chooseWorkspace: builder.mutation({
+      query: (body) => ({
+        url: 'choose',
+        method: 'POST',
+        body
+      })
     })
   })
 })
@@ -34,5 +46,7 @@ export const workspaceApi = createApi({
 export const {
   useCreateWorkspaceMutation,
   useFetchWorkspaceQuery,
-  useFetchWorkspaceMembersQuery
+  useFetchWorkspaceMembersQuery,
+  useFetchWorkspacesQuery,
+  useChooseWorkspaceMutation
 } = workspaceApi

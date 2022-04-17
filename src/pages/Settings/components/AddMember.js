@@ -1,6 +1,8 @@
 import React, { Fragment, useState, useEffect } from 'react'
+import { useDispatch } from 'react-redux'
 import {
   Modal,
+  Text,
   TextInput,
   Button,
   Select,
@@ -11,8 +13,9 @@ import {
 } from '@mantine/core'
 import { useForm, yupResolver } from '@mantine/form'
 import { showNotification } from '@mantine/notifications'
-import { Mail, Lock } from 'tabler-icons-react'
+import { Mail, Lock, Check } from 'tabler-icons-react'
 import { useAddMemberMutation } from '../../../store/services/workspaceMemberApi'
+import { workspaceApi } from '../../../store/services/workspaceApi'
 import { addMemberSchema, addUserSchema } from '../../../utils/validationSchemes'
 
 const ROLES = [
@@ -23,7 +26,6 @@ const ROLES = [
 const AddMember = ({ isOpened, onClose }) => {
   const [isNewUser, setIsNewUser] = useState(false)
   const [addMember, { data, isLoading }] = useAddMemberMutation()
-  console.log(isLoading, data)
   const form = useForm({
     schema: yupResolver(isNewUser ? addUserSchema : addMemberSchema),
     initialValues: {
@@ -35,6 +37,8 @@ const AddMember = ({ isOpened, onClose }) => {
       confirmedPassword: ''
     }
   })
+  const [error, setError] = useState(null)
+  const dispatch = useDispatch()
 
   const handleNewUserSwitchToggle = () => {
     setIsNewUser((prevState) => !prevState)
@@ -43,14 +47,17 @@ const AddMember = ({ isOpened, onClose }) => {
   useEffect(() => {
     if (data) {
       showNotification({
-        title: 'Пользователь добавился в рабочее пространство',
-        message: 'Перезагрузите страницу для обновления таблицы',
+        title: data.message,
+        color: 'teal',
+        icon: <Check size={18} />
       })
+      dispatch(workspaceApi.util.invalidateTags(['WorkspaceMembers']))
     }
   }, [data])
 
   const handleFormSubmit = async (values, e) => {
     e.preventDefault()
+    setError(null)
 
     try {
       let preparedValues = null
@@ -64,6 +71,8 @@ const AddMember = ({ isOpened, onClose }) => {
     } catch (error) {
       if (error?.data?.field) {
         form.setFieldError(error.data.field, error.data.message)
+      } else {
+        setError(error.data.message)
       }
     }
   }
@@ -71,9 +80,10 @@ const AddMember = ({ isOpened, onClose }) => {
   return (
     <Modal
       opened={isOpened}
-      title='Добавить участника'
+      title={<Text size='lg' weight={700}>Добавить участника</Text>}
       closeButtonLabel='Закрыть окно добавления участников'
       onClose={onClose}>
+      {error && <Text size='sm' color='red'>{error}</Text>}
       <form onSubmit={form.onSubmit((values, e) => handleFormSubmit(values, e))}>
         <TextInput type='email' label='Почта' mb='xs' icon={<Mail size={16} />} {...form.getInputProps('email')} />
         <Select label='Роль' placeholder='Выберите роль' data={ROLES} mb='lg' {...form.getInputProps('role')} />

@@ -27,15 +27,15 @@ const CreateWorkspace = () => {
   useEffect(() => {
     if (data) {
       cookie.set('user', JSON.stringify(data), { expires: 7 })
+      navigate('/')
     }
-  }, [data])
+  }, [data, navigate])
 
   const handleFormSubmit = async (values, e) => {
     e.preventDefault()
 
     try {
       await createWorkspace(values).unwrap()
-      navigate('/')
     } catch (error) {
       if (error?.data?.field) {
         form.setFieldError(error.data.field, error.data.message)
