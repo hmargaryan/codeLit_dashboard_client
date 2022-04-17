@@ -1,9 +1,8 @@
 .root {
-  height: 100vh;
-  background-color: #4b86b4;
+  margin-top: 30vh;
 }
 
-.paper {
+.container {
   width: 100%;
   max-width: 500px;
 }
