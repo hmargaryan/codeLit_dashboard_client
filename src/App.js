@@ -9,8 +9,8 @@ import SignUp from './pages/SignUp'
 import SignIn from './pages/SignIn'
 import CreateWorkspace from './pages/CreateWorkspace/CreateWorkspace'
 import ChooseWorkspace from './pages/ChooseWorkspace/ChooseWorkspace'
+import Tasks from './pages/Tasks/Tasks'
 import Settings from './pages/Settings/Settings'
-import Test from './Test'
 
 const App = () => {
   const [colorScheme, setColorScheme] = useState('light')
@@ -35,8 +35,8 @@ const App = () => {
                 </Route>
                 <Route path='/' element={<ProtectedRoute />}>
                   <Route path='/' element={<AppLayout />}>
-                    <Route path='/test' element={<ProtectedRoute />}>
-                      <Route path='/test' element={<Test />} />
+                    <Route path='/tasks' element={<ProtectedRoute />}>
+                      <Route path='/tasks' element={<Tasks />} />
                     </Route>
                     <Route path='/settings' element={<ProtectedRoute />}>
                       <Route path='/settings' element={<Settings />} />

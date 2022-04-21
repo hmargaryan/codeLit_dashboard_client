@@ -59,3 +59,12 @@ export const chooseWorkspaceSchema = Yup.object().shape({
   id: Yup.string()
     .required('Выберите рабочее пространство')
 })
+
+export const addTaskSchema = Yup.object().shape({
+  name: Yup.string()
+    .required('Введите название'),
+  description: Yup.string()
+    .required('Введите описание'),
+  example: Yup.string()
+    .required('Введите пример кода')
+})
