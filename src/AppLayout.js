@@ -1,5 +1,5 @@
 import React from 'react'
-import { AppShell } from '@mantine/core'
+import { AppShell, Container } from '@mantine/core'
 import { Outlet } from 'react-router-dom'
 import Navbar from './components/Navbar/Navbar'
 import Header from './components/Header'
@@ -18,7 +18,9 @@ const AppLayout = () => {
               : theme.colors.gray[0]
         }
       })}>
-      <Outlet />
+        <Container size={1220}>
+            <Outlet />
+        </Container>
     </AppShell>
   )
 }

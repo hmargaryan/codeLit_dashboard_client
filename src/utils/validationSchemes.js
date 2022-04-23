@@ -65,6 +65,11 @@ export const addTaskSchema = Yup.object().shape({
     .required('Введите название'),
   description: Yup.string()
     .required('Введите описание'),
-  example: Yup.string()
-    .required('Введите пример кода')
+  time: Yup.number()
+      .min(1, 'Время должно быть больше нуля'),
+  difficulty: Yup.string()
+      .oneOf(['easy', 'medium', 'hard', '', null])
+      .nullable(),
+  template: Yup.string(),
+  additionalInfo: Yup.string()
 })

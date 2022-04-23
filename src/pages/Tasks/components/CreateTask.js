@@ -4,13 +4,23 @@ import {
   Text,
   TextInput,
   Textarea,
+  NumberInput,
+  Select,
+  Box,
   Button
 } from '@mantine/core'
+import { RichTextEditor } from '@mantine/rte'
 import { useForm, yupResolver } from '@mantine/form'
 import { showNotification } from '@mantine/notifications'
 import { Check } from 'tabler-icons-react'
 import { useCreateTaskMutation, useEditTaskMutation } from '../../../store/services/taskApi'
 import { addTaskSchema } from '../../../utils/validationSchemes'
+
+const DIFFICULTY = [
+  { value: 'easy', label: 'Легкий' },
+  { value: 'medium', label: 'Средний' },
+  { value: 'hard', label: 'Сложный' }
+]
 
 const CreateTask = ({ isOpened, onClose, currentTask }) => {
   const [createTask, { data: createdTask, isLoading: isCreatingLoading }] = useCreateTaskMutation()
@@ -21,7 +31,9 @@ const CreateTask = ({ isOpened, onClose, currentTask }) => {
     initialValues: {
       name: '',
       description: '',
-      example: ''
+      difficulty: '',
+      template: '',
+      additionalInfo: ''
     }
   })
 
@@ -35,7 +47,10 @@ const CreateTask = ({ isOpened, onClose, currentTask }) => {
       form.setValues({
         name: currentTask.name,
         description: currentTask.description,
-        example: currentTask.example
+        difficulty: currentTask.difficulty,
+        time: currentTask.time,
+        template: currentTask.template,
+        additionalInfo: currentTask.additionalInfo
       })
     }
   }, [currentTask])
@@ -56,7 +71,6 @@ const CreateTask = ({ isOpened, onClose, currentTask }) => {
 
     try {
       if (currentTask) {
-        console.log(values);
         await editTask({ id: currentTask.id, body: values }).unwrap()
       } else {
         await createTask(values).unwrap()
@@ -75,27 +89,56 @@ const CreateTask = ({ isOpened, onClose, currentTask }) => {
       opened={isOpened}
       title={<Text size='lg' weight={700}>{currentTask ? 'Изменить' : 'Добавить'} задачу</Text>}
       closeButtonLabel='Закрыть окно добавления участников'
+      size='xl'
       onClose={handleModalClose}>
       {error && <Text size='sm' color='red'>{error}</Text>}
       <form onSubmit={form.onSubmit((values, e) => handleFormSubmit(values, e))}>
         <TextInput label='Название' placeholder='Поиск гласных' mb='xs' {...form.getInputProps('name')} />
         <Textarea
           label='Описание'
-          description='Описание задачи будет добавлено в редактор кода в виде комментария'
           placeholder='Нужно написать функцию, принимающую строку в качестве аргумента и возвращающую количество гласных, которые содержатся в строке. Гласными являются «a», «e», «i», «o», «u».'
           autosize
           minRows={3}
           maxRows={10}
           mb='xs'
           {...form.getInputProps('description')} />
+        <Select
+            label='Уровень сложности'
+            placeholder='Выберите уровень'
+            clearable
+            data={DIFFICULTY}
+            mb='xs'
+            {...form.getInputProps('difficulty')} />
+        <NumberInput
+            label='Время на выполнение'
+            description='В минутах'
+            placeholder='Укажите время на выполнение'
+            min={1}
+            mb='xs'
+            {...form.getInputProps('time')} />
         <Textarea
-          label='Пример кода'
+          label='Шаблон'
+          description='Вы можете указать базовый шаблон кода, консольные тесткейсы и т.п. Текст ниже будет вставлен в редактор кода'
           placeholder="console.log(findVowels('barcode')) // --> 3"
           autosize
           minRows={3}
           maxRows={10}
-          mb='lg'
-          {...form.getInputProps('example')} />
+          mb='xs'
+          {...form.getInputProps('template')} />
+        <Box>
+          <Text size='sm' mb={4}>Дополнительная информация</Text>
+          <RichTextEditor
+              controls={[
+                ['bold', 'italic', 'underline', 'strike', 'clean'],
+                ['h1', 'h2', 'h3', 'h4', 'h5'],
+                ['unorderedList', 'orderedList'],
+                ['link', 'blockquote', 'codeBlock'],
+                ['alignLeft', 'alignCenter', 'alignRight'],
+                ['sup', 'sub']
+              ]}
+              mb='lg'
+              {...form.getInputProps('additionalInfo')} />
+        </Box>
         <Button
           type='submit'
           loading={isCreatingLoading || isEditingLoading}

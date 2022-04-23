@@ -7,15 +7,22 @@ import {
   Text,
   Accordion,
   Space,
-  Code,
   useMantineTheme
 } from '@mantine/core'
+import { Prism } from '@mantine/prism'
+import { RichTextEditor } from '@mantine/rte'
 import { useModals } from '@mantine/modals'
 import { showNotification } from '@mantine/notifications'
 import { Search, Check, X } from 'tabler-icons-react'
 import { useFetchTasksQuery, useDeleteTaskMutation } from '../../store/services/taskApi'
 import CreateTask from './components/CreateTask'
 import styles from './Tasks.module.css'
+
+const DIFFICULTY_MAP = {
+  easy: 'легкий',
+  medium: 'средний',
+  hard: 'сложный'
+}
 
 const Tasks = () => {
   const theme = useMantineTheme()
@@ -99,11 +106,37 @@ const Tasks = () => {
       </Box>
       {tasks && (
         <Accordion classNames={{ control: theme.colorScheme === 'light' && styles.accordionControl }} onClick={handleAccordionClick}>
-          {tasks.map(({ id, name, description, example }) => {
+          {tasks.map(({ id, name, description, difficulty, time, template, additionalInfo }) => {
             return (
               <Accordion.Item key={id} label={name}>
-                <Text>{description}</Text>
-                <Code color='blue'>{example}</Code>
+                <Text mb='sm'>
+                  <Text weight='bold' sx={{ display: 'inline' }}>Описание: </Text>
+                  {description}
+                </Text>
+                {difficulty && (
+                    <Text mb='sm'>
+                      <Text weight='bold' sx={{ display: 'inline' }}>Уровень сложности: </Text>
+                      {DIFFICULTY_MAP[difficulty]}
+                    </Text>
+                )}
+                {time && (
+                    <Text mb='sm'>
+                      <Text weight='bold' sx={{ display: 'inline' }}>Время на выполнение: </Text>
+                      {time} мин
+                    </Text>
+                )}
+                {template && (
+                    <Box mb='sm'>
+                      <Text weight='bold' mb={4}>Шаблон: </Text>
+                      <Prism language='javascript' colorScheme={theme.colorScheme === 'light' ? 'dark' : 'light'}>{template}</Prism>
+                    </Box>
+                )}
+                {additionalInfo !== '<p><br></p>' && (
+                    <Box mb='sm'>
+                      <Text weight='bold' mb={4}>Дополнительная информация: </Text>
+                      <RichTextEditor readOnly value={additionalInfo}/>
+                    </Box>
+                )}
                 <Space h='md' />
                 <Box>
                   <Button
