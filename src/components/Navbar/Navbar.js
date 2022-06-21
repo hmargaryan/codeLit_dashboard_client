@@ -5,7 +5,7 @@ import User from './components/User'
 
 const Navbar = () => {
   return (
-    <NavbarMantine width={{ base: 300 }} p='xs'>
+    <NavbarMantine width={{ base: 300}} p='xs'>
       <NavbarMantine.Section grow>
         <MainLinks />
       </NavbarMantine.Section>

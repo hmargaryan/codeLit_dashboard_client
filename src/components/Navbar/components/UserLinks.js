@@ -1,16 +1,19 @@
 import React, { Fragment } from 'react'
-import { useDispatch } from 'react-redux'
+
 import { Divider, Menu, Text } from '@mantine/core'
 import { useModals } from '@mantine/modals'
-import { Link, useNavigate } from 'react-router-dom'
 import cookie from 'js-cookie'
-import { User, Database, Palette, Logout } from 'tabler-icons-react'
+import { useDispatch } from 'react-redux'
+import { Link, useNavigate } from 'react-router-dom'
+import { User, Database, Palette, Logout, Businessplan } from 'tabler-icons-react'
+
 import { workspaceApi } from '../../../store/services/workspaceApi'
 
 const links = [
   { path: '/settings?tab=profile', icon: <User size={14} />, label: 'Профиль' },
   { path: '/settings?tab=workspace', icon: <Database size={14} />, label: 'Рабочее пространство' },
-  { path: '/settings?tab=branding', icon: <Palette size={14} />, label: 'Брендинг' }
+  { path: '/settings?tab=businessplan', icon: <Businessplan size={14} />, label: 'Тариф' }
+  // { path: '/settings?tab=branding', icon: <Palette size={14} />, label: 'Брендинг' }
 ]
 
 const UserLinks = () => {

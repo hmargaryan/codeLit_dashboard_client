@@ -9,6 +9,7 @@ import {
   Space,
   useMantineTheme
 } from '@mantine/core'
+import { useDebouncedValue } from '@mantine/hooks'
 import { Prism } from '@mantine/prism'
 import { RichTextEditor } from '@mantine/rte'
 import { useModals } from '@mantine/modals'
@@ -16,7 +17,6 @@ import { showNotification } from '@mantine/notifications'
 import { Search, Check, X } from 'tabler-icons-react'
 import { useFetchTasksQuery, useDeleteTaskMutation } from '../../store/services/taskApi'
 import CreateTask from './components/CreateTask'
-import styles from './Tasks.module.css'
 
 const DIFFICULTY_MAP = {
   easy: 'легкий',
@@ -28,9 +28,10 @@ const Tasks = () => {
   const theme = useMantineTheme()
   const modals = useModals()
   const [term, setTerm] = useState('')
+  const [debouncedTerm] = useDebouncedValue(term, 500)
   const [isCreateTaskModalOpened, setIsCreateTaskModalOpened] = useState(false)
   const [currentTask, setCurrentTask] = useState(null)
-  const { data: tasks } = useFetchTasksQuery(term)
+  const { data: tasks } = useFetchTasksQuery(debouncedTerm)
   const [deleteMutation, { data, error }] = useDeleteTaskMutation()
 
   const handleTermChange = (event) => {
@@ -102,10 +103,10 @@ const Tasks = () => {
       </Title>
       <Box sx={{ display: 'flex', justifyContent: 'space-between', marginBottom: theme.spacing.sm }}>
         <TextInput icon={<Search size={16} />} placeholder='Найти задачу' onChange={handleTermChange} />
-        <Button onClick={handleCreateTaskModalToggle}>Добавить задачу</Button>
+        <Button variant='light' onClick={handleCreateTaskModalToggle}>Создать задачу</Button>
       </Box>
       {tasks && (
-        <Accordion classNames={{ control: theme.colorScheme === 'light' && styles.accordionControl }} onClick={handleAccordionClick}>
+        <Accordion onClick={handleAccordionClick}>
           {tasks.map(({ id, name, description, difficulty, time, template, additionalInfo }) => {
             return (
               <Accordion.Item key={id} label={name}>
@@ -128,7 +129,14 @@ const Tasks = () => {
                 {template && (
                     <Box mb='sm'>
                       <Text weight='bold' mb={4}>Шаблон: </Text>
-                      <Prism language='javascript' colorScheme={theme.colorScheme === 'light' ? 'dark' : 'light'}>{template}</Prism>
+                      <Prism
+                          sx={{
+                            border: `1px solid ${theme.colorScheme === 'dark' ? theme.colors.dark[5] : theme.colors.gray[4]}`,
+                            borderRadius: 4
+                          }}
+                          language='javascript'>
+                        {template}
+                      </Prism>
                     </Box>
                 )}
                 {additionalInfo !== '<p><br></p>' && (
